@@ -1,4 +1,3 @@
 # Livekod
-## 2019-10-19
 
-Livekod från kurstillfälle 9
+Livekod från kurstillfälle 9 och framåt
