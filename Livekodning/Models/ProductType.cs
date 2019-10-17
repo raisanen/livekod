@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Livekodning_2019_10_16.Models {
+namespace Livekodning.Models {
     public enum ProductType {
         None,
         Physical,

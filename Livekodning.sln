@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29230.47
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Livekodning_2019-10-16", "Livekodning_2019-10-16\Livekodning_2019-10-16.csproj", "{F814D8F2-6BCB-4803-BBF1-13FCC832AFB7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Livekodning", "Livekodning\Livekodning.csproj", "{F814D8F2-6BCB-4803-BBF1-13FCC832AFB7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

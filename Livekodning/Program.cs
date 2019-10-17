@@ -1,9 +1,9 @@
-﻿using Livekodning_2019_10_16.Interfaces;
-using Livekodning_2019_10_16.Models;
+﻿using Livekodning.Interfaces;
+using Livekodning.Models;
 using System;
 using System.Collections.Generic;
 
-namespace Livekodning_2019_10_16 {
+namespace Livekodning {
     class Program {
         static void Main(string[] args) {
             var productList = new List<IPrintable> {

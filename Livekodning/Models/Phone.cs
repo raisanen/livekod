@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Livekodning_2019_10_16.Models {
+namespace Livekodning.Models {
     public class Phone : Product {
         public Phone(string name, decimal price) : base(name, price, ProductType.Physical) {
 

@@ -1,9 +1,9 @@
-﻿using Livekodning_2019_10_16.Interfaces;
+﻿using Livekodning.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Livekodning_2019_10_16.Models {
+namespace Livekodning.Models {
     public abstract class Product : IPrintable {
         public string Name { get; set; }
         public decimal Price { get; set; }
