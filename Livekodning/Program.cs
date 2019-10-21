@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-
+using System.Threading.Tasks;
 using Livekodning.Exceptions;
 using Livekodning.Models;
 using Livekodning.Services;
@@ -14,7 +14,7 @@ namespace Livekodning {
                 Console.WriteLine("Added new Product: " + product.GetPrintableString());
             }
         }
-        static void Main(string[] args) {
+        static void Main(string[] _) {
             var serializerService = new ProductSerializerService();
             var jsonFilename = "products.json";
             var productDb = new ProductDatabase();

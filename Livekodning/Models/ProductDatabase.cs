@@ -17,7 +17,14 @@ namespace Livekodning.Models {
                 ProductsAdded(newProducts);
             }
         }
+        public bool NameIsSame(Product p, Product otherProduct) {
+            return p.Name == otherProduct.Name;
+        }
+
         public async Task AddProduct(Product product) {
+            if (Products.Any(p => p.Name == product.Name)) {
+                return;
+            }
             var newProducts = new List<Product>();
             newProducts.Add(product);
             await AddProducts(newProducts);
@@ -41,6 +48,25 @@ namespace Livekodning.Models {
 
             return Products
                 .Where((Product p) => p.Type == type)
+                .ToList();
+        }
+        public List<Product> GetProductsWithPriceBetween(decimal min, decimal max) {
+            return Products
+                .Where((p) => p.Price > min && p.Price < max)
+                .ToList();
+        }
+
+        public List<Product> GetProductsSortedByName() {
+            return Products
+                .OrderBy((p) => p.Name)
+                    .ThenBy((p) => p.Price)
+                .ToList();
+        }
+
+        public List<string> GetProductNames() {
+            return Products
+                .Select((p) => p.Name)
+                .OrderBy(n => n.ToUpper())
                 .ToList();
         }
     }
