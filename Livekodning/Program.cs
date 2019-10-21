@@ -1,11 +1,11 @@
-﻿using Livekodning.Exceptions;
-using Livekodning.Interfaces;
-using Livekodning.Models;
-using Livekodning.Services;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+
+using Livekodning.Exceptions;
+using Livekodning.Models;
+using Livekodning.Services;
 
 namespace Livekodning {
     class Program {
@@ -22,14 +22,17 @@ namespace Livekodning {
             try {
                 if (File.Exists(jsonFilename)) {
                     var productList = serializerService.Deserialize(jsonFilename);
-                    productDb.AddProducts(productList.ToList());
+                    // .Result väntar på Deserialize
+                    productDb.AddProducts(productList.Result.ToList());
+                    // AddProducts är async, nästa rad hinner (oftast) före
+                    Console.WriteLine("Efter AddProducts");
                 }
-
             } catch (ProductSerializerServiceException ex) {
                 Console.WriteLine($"Exception in file {ex.Filename}: {ex.Message}");
             } catch (Exception ex) {
                 Console.WriteLine(ex.Message);
             }
+
             Console.ReadKey();
         }
     }

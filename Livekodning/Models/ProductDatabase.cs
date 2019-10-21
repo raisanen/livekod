@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Livekodning.Models {
     public class ProductDatabase {
@@ -10,20 +11,23 @@ namespace Livekodning.Models {
         public delegate void ProductsAddedHandlerMethod(List<Product> products);
         public event ProductsAddedHandlerMethod ProductsAdded;
 
-        public ProductDatabase() {
-            Products = new List<Product>();
+        public ProductDatabase() { Products = new List<Product>(); }
+        private void FireProductsAddedEvent(List<Product> newProducts) {
+            if (ProductsAdded != null) {
+                ProductsAdded(newProducts);
+            }
         }
-
-        public void AddProduct(Product product) {
-            Products.Add(product);
+        public async Task AddProduct(Product product) {
             var newProducts = new List<Product>();
             newProducts.Add(product);
-            FireProductsAddedEvent(newProducts);
+            await AddProducts(newProducts);
         }
 
-        public void AddProducts(List<Product> products) {
-            Products.AddRange(products);
-            FireProductsAddedEvent(products);
+        public async Task AddProducts(List<Product> products) {
+            await Task.Run(() => {
+                Products.AddRange(products);
+                FireProductsAddedEvent(products);
+            });
         }
 
         public List<Product> GetProductsByType(ProductType type) {
@@ -38,12 +42,6 @@ namespace Livekodning.Models {
             return Products
                 .Where((Product p) => p.Type == type)
                 .ToList();
-        }
-
-        private void FireProductsAddedEvent(List<Product> newProducts) {
-            if (ProductsAdded != null) {
-                ProductsAdded(newProducts);
-            }
         }
     }
 }

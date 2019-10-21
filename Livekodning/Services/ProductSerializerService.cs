@@ -7,18 +7,21 @@ using Newtonsoft.Json;
 
 using Livekodning.Exceptions;
 using Livekodning.Models;
+using System.Threading.Tasks;
 
 namespace Livekodning.Services {
     public class ProductSerializerService {
-        public IEnumerable<Product> Deserialize(string filename) {
+        public async Task<IEnumerable<Product>> Deserialize(string filename) {
             try {
-                var serializer = CreateSerializer();
-                using (var sr = new StreamReader(filename)) {
-                    using (var jr = new JsonTextReader(sr)) {
-                        var list = serializer.Deserialize<IEnumerable<Product>>(jr);
-                        return list;
+                return await Task.Run<IEnumerable<Product>>(() => {
+                    var serializer = CreateSerializer();
+                    using (var sr = new StreamReader(filename)) {
+                        using (var jr = new JsonTextReader(sr)) {
+                            var list = serializer.Deserialize<IEnumerable<Product>>(jr);
+                            return list;
+                        }
                     }
-                }
+                });
             } catch (Exception) {
                 throw new ProductSerializerServiceException(filename, "Couldn't deserialize file!");
             }
